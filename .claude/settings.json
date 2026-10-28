@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/ferramentas/cerebro.py\" mapa --silencioso 2>/dev/null; echo 'Cérebro: leia cerebro/00 - Mapa.md antes de abrir arquivos; busque com python3 ferramentas/cerebro.py buscar \"assunto\"; anote decisões com python3 ferramentas/cerebro.py anotar \"...\"'"
+          }
+        ]
+      }
+    ]
+  }
+}
