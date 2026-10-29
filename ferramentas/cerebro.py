@@ -31,7 +31,9 @@ TEXTO = {".md", ".txt", ".py", ".js", ".mjs", ".ts", ".tsx", ".jsx", ".html", ".
          ".yml", ".yaml", ".toml", ".csv", ".sql", ".java", ".kt", ".c", ".h", ".cpp", ".cs", ".go", ".rs", ".php"}
 IGNORAR = {"node_modules", "dist", "build", ".git", ".cerebro-cache", "saida", "__pycache__", ".venv", "venv",
            ".next", "coverage", ".obsidian"}
-LIMITE_ARQUIVO = 400_000      # arquivos maiores que isto (bytes) não entram na busca (quase sempre são gerados)
+LIMITE_ARQUIVO = 400_000      # acima disto (bytes) o mapa não lê a descrição do arquivo
+LIMITE_BUSCA = 8_000_000      # acima disto o arquivo não entra na busca
+FORA_DA_BUSCA = (".claude/skills/", "cerebro/Mapa/")  # manuais de ferramentas e o próprio mapa só atrapalham a busca
 JUNTAR_ACIMA = 12             # pasta com mais arquivos do mesmo tipo que isto vira uma linha só no mapa
 BRASILIA = timezone(timedelta(hours=-3))
 
@@ -125,7 +127,7 @@ def escrever(arquivo: Path, texto: str) -> None:
 
 def fazer_mapa(silencioso: bool = False) -> None:
     """Mapa curto (uma linha por pasta) + um mapa detalhado por pasta principal, aberto só quando precisa."""
-    lista = arquivos()
+    lista = [p for p in arquivos() if not p.as_posix().startswith("cerebro/Mapa/")]  # o mapa não conta a si mesmo
     nome = RAIZ.name
     PASTA.mkdir(exist_ok=True)
     detalhes = PASTA / "Mapa"
@@ -187,6 +189,12 @@ def normalizar(texto: str) -> list[str]:
     return [t for t in re.findall(r"[a-z0-9_]{2,}", texto)]
 
 
+def limpar(linha: str) -> str:
+    """Tira imagens embutidas (base64) e corta linhas gigantes (código minificado), que só pesam."""
+    linha = re.sub(r"data:[\w/+.-]+;base64,[A-Za-z0-9+/=]{40,}", "data:…", linha)
+    return linha[:400]
+
+
 def pedacos() -> list[dict]:
     """Divide os arquivos de texto em pedaços de ~30 linhas (guardados em cache até o arquivo mudar)."""
     CACHE.mkdir(exist_ok=True)
@@ -203,13 +211,13 @@ def pedacos() -> list[dict]:
         if p.suffix.lower() not in TEXTO:
             continue
         info = alvo.stat()
-        if info.st_size > LIMITE_ARQUIVO:
+        chave = p.as_posix()
+        if info.st_size > LIMITE_BUSCA or chave.startswith(FORA_DA_BUSCA):
             continue
-        chave = str(p)
         if chave in antigo and antigo[chave]["mtime"] == info.st_mtime:
             novo[chave] = antigo[chave]
             continue
-        linhas = alvo.read_text(encoding="utf-8", errors="ignore").splitlines()
+        linhas = [limpar(l) for l in alvo.read_text(encoding="utf-8", errors="ignore").splitlines()]
         partes = []
         for i in range(0, max(1, len(linhas)), 30):
             bloco = "\n".join(linhas[i:i + 30])
@@ -233,7 +241,10 @@ def buscar(consulta: str, quantos: int = 8) -> None:
     for d in docs:
         tamanho_doc = sum(d["termos"].values()) or 1
         nota = 0.0
+        caminho = set(normalizar(d["arquivo"]))
         for t in termos:
+            if t in caminho:  # o nome do arquivo ou da pasta tem a palavra: forte sinal de que é o lugar certo
+                nota += 1.5 * math.log(1 + (n - df[t] + .5) / (df[t] + .5))
             f = d["termos"].get(t, 0)
             if f:
                 idf = math.log(1 + (n - df[t] + .5) / (df[t] + .5))
@@ -244,8 +255,15 @@ def buscar(consulta: str, quantos: int = 8) -> None:
     if not notas:
         print("nada encontrado")
         return
-    for nota, d in notas[:quantos]:
-        linhas = (RAIZ / d["arquivo"]).read_text(encoding="utf-8", errors="ignore").splitlines()
+    por_arquivo, escolhidos = Counter(), []
+    for nota, d in notas:  # no máximo 2 trechos por arquivo, para mostrar mais lugares diferentes
+        if por_arquivo[d["arquivo"]] < 2:
+            por_arquivo[d["arquivo"]] += 1
+            escolhidos.append((nota, d))
+        if len(escolhidos) == quantos:
+            break
+    for nota, d in escolhidos:
+        linhas = [limpar(l) for l in (RAIZ / d["arquivo"]).read_text(encoding="utf-8", errors="ignore").splitlines()]
         trecho = linhas[d["linha"] - 1:d["linha"] + 29]
         melhor = max(range(len(trecho)), key=lambda i: sum(t in normalizar(trecho[i]) for t in termos)) if trecho else 0
         inicio = d["linha"] + max(0, melhor - 1)
@@ -270,6 +288,13 @@ def anotar(texto: str) -> None:
 
 if __name__ == "__main__":
     os.chdir(RAIZ)
+    try:
+        sys.stdout.reconfigure(errors="replace")
+    except AttributeError:
+        pass
+    import signal
+    if hasattr(signal, "SIGPIPE"):
+        signal.signal(signal.SIGPIPE, signal.SIG_DFL)  # cortar a saída (| head) não é erro
     comando = sys.argv[1] if len(sys.argv) > 1 else "ajuda"
     resto = " ".join(a for a in sys.argv[2:] if not a.startswith("--"))
     if comando == "mapa":

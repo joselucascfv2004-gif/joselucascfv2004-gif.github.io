@@ -4,7 +4,7 @@
 > **Claude: leia este mapa antes de abrir arquivos.** Abra só o mapa detalhado da pasta que interessa
 > (`cerebro/Mapa/<pasta>.md`) e, para achar um assunto, use `python3 ferramentas/cerebro.py buscar "assunto"`.
 
-252 arquivos.
+249 arquivos.
 
 ## Comece por aqui
 
@@ -23,6 +23,5 @@
 
 - **[[Mapa/.claude|.claude/]]** (239 arquivos)
   - `.claude/skills/` (238)
-- **[[Mapa/cerebro|cerebro/]]** (5 arquivos)
-  - `cerebro/Mapa/` (3)
+- **[[Mapa/cerebro|cerebro/]]** (2 arquivos)
 - **[[Mapa/ferramentas|ferramentas/]]** (2 arquivos)
