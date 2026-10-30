@@ -12,12 +12,17 @@ Levantadas a partir dos vídeos de @alexandrekleppa (5 repositórios) e @migue.b
 | `frontend-design` | Escolher direção visual, fontes e cores que não pareçam modelo pronto |
 | `animacoes-interface` | Animações de interface prontas (números que contam, gráficos que se desenham, abas) |
 
+## Instaladas nos 7 repositórios (30/10/2026, aprovadas pelo José)
+
+| Skill | Licença | Para quê |
+|---|---|---|
+| `ui-ux-pro-max` ([origem](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill), versão 9a3f14f) | MIT | Design system do projeto (estilos, paletas, pares de fontes, 119 regras de UX). Busca: `python3 .claude/skills/ui-ux-pro-max/scripts/search.py "<busca>" --domain ux` (só na nuvem; scripts lidos antes de instalar: só leem as tabelas e gravam em `design-system/` quando pedido) |
+| `design-motion-principles` ([origem](https://github.com/kylezantos/design-motion-principles), versão 4a9ca87) | MIT | Criar e auditar animações (Emil Kowalski, Jakub Krehel, Jhey Tompkins); só textos e modelos HTML |
+
 ## Recomendadas e ainda não instaladas
 
 | Projeto | Licença | O que faz | Observação |
 |---|---|---|---|
-| [UI UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | MIT | Monta um design system para o projeto (estilos, paletas, pares de fontes, 119 regras de UX) | ~3,7 MB; tem scripts Python de busca local (rodam na nuvem, não nos PCs do José) |
-| [Design Motion Principles](https://github.com/kylezantos/design-motion-principles) | MIT | Criar e auditar animações com as regras de Emil Kowalski, Jakub Krehel e Jhey Tompkins | Só textos e modelos HTML, ~250 KB |
 | [Awesome Claude Design](https://github.com/VoltAgent/awesome-claude-design) | ver repositório | 68 arquivos DESIGN.md prontos (inspirações de design system) | Escolher um e usar como ponto de partida |
 | [design-md-chrome](https://github.com/bergside/design-md-chrome) | ver repositório | Extensão do Chrome que lê as cores, fontes e espaçamentos de um site aberto e gera um DESIGN.md | Instala no Chrome do José (modo desenvolvedor) |
 
