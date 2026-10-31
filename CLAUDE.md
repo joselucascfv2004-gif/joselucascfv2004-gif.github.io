@@ -1,5 +1,8 @@
 # Instruções do repositório `joselucascfv2004-gif.github.io`
 
+> **Idioma (pedido do dono em 31/10/2026): responda sempre em português do Brasil**, em todas as mensagens, inclusive
+> nos resumos de fim de tarefa e quando o assunto for técnico. Nunca troque para o inglês.
+
 <!-- cerebro -->
 ## Cérebro do repositório (ler menos, gastar menos)
 
