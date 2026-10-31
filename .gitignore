@@ -1,2 +1,5 @@
 .cerebro-cache/
 .obsidian/workspace*.json
+
+# mapa do graphify (gerado)
+graphify-out/
