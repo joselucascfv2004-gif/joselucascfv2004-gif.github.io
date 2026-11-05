@@ -27,3 +27,15 @@ Não crie nem traga pastas `.claude/skills/` para cá.
 
 Ao começar qualquer chat, leia `cerebro/Pendências.md`: lá cada chat anterior deixou o que falta fazer e onde estão
 os arquivos. Ao terminar, atualize esse arquivo (marque o que ficou pronto e acrescente o que ficou faltando).
+
+## Registro de tudo (regra fixa do dono, 05/11/2026)
+
+Toda alteração ou pedido do dono sobre os repositórios tem que ficar registrado no repositório **no mesmo chat, antes de
+dizer que terminou**. Nada pode ficar só na conversa: o chat pode acabar a qualquer momento (em 05/11/2026 o plano de uma
+das contas expirou no meio de um trabalho).
+- O que mudou e por quê: commit com mensagem clara, juntado ao ramo principal e enviado (push).
+- Pedidos e decisões do dono: regra permanente vai para este `CLAUDE.md`; o resto vai para o diário
+  (`python3 ferramentas/cerebro.py anotar "..."`).
+- O que falta fazer e onde estão os arquivos (com o ramo): `cerebro/Pendências.md`.
+- Publicações (site, artefato, Netlify, atualização do app, APK): link e versão, no `CLAUDE.md` ou nas Pendências.
+- Registre aos poucos, a cada etapa concluída, e não só no fim.
