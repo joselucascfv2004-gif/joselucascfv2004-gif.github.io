@@ -38,6 +38,21 @@ repositório (`motor/`, narração + legenda karaokê) e o motor 3D novo (`motor
    um final que puxa comentário ("E se fosse a gravidade?"). Legenda com a pergunta, 3 a 5 hashtags e "fontes
    nos comentários".
 
+## Estilo do canal e versões (dica de 04/11/2026)
+
+- **`style.md` do canal:** antes do primeiro vídeo de um nicho, escreva um `style.md` com o estilo em valores
+  exatos, tirado de 3 a 5 vídeos de referência ("inspire-se, não copie"): cores (hex), fonte e tamanhos da
+  legenda, palavras por bloco de legenda, ritmo de corte (s), velocidade e voz da narração (personagem e receita
+  em `vozes/personagens/receitas.json`), música (volume em dB abaixo da voz), granulado, vinheta. Todo vídeo novo
+  lê o `style.md` primeiro; mudou o gosto, muda o arquivo.
+- **Pastas:** `raw/` (material bruto), `references/` (vídeos de referência e notas), `done/` (finais).
+- **Versões numeradas:** `rascunho-v1.mp4`, `v2`, `v3`… Nunca sobrescreva. Antes de mostrar uma versão ao dono,
+  confira você mesmo (folha de 12 quadros do vídeo final, duração, áudio presente, legenda dentro da área segura)
+  e diga o que mudou da versão anterior.
+- **Caminho 2D aprovado pelo dono (03/11/2026):** canvas próprio no estilo papel recortado, com camadas,
+  granulado, vinheta e desfoque, renderizado em 4 abas (`projetos/sol-maracana/` é o modelo). Gasta poucos
+  tokens quando um ajudante (subagente) monta o vídeo inteiro.
+
 ## Regras da tela vertical
 
 - Área segura: deixe livres os 250 px de baixo (legenda e botões do TikTok) e os 150 px da direita (curtir,

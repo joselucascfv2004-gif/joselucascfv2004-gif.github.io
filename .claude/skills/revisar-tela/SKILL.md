@@ -32,6 +32,9 @@ emoji, só ícones; nos modelos de cardápio cada tipo tem cor fixa e no máximo
    `tipos/ferramentas.md` (Taste Skill, Impeccable e outras).
 
    Uma tela pode ser de dois tipos (um checkout é produto e formulário): abra os dois.
+
+   Antes de **publicar** um site ou app (não só mudar o visual), rode também a skill `checklist-publicar`
+   (segurança, gastos, velocidade e parte jurídica).
 2. **Objetivo principal:** o que a pessoa veio fazer (comprar, pedir, conferir um valor, achar um
    cadastro, responder uma questão, salvar). Tudo na tela deve ajudar isso ou sair do caminho.
 3. **Quem usa e onde:** cliente no celular, funcionário no computador do trabalho, gente com pressa.
@@ -106,11 +109,25 @@ Percorra a lista e anote **só o que achar de verdade**, com a foto como prova.
     "Excluir 3 lançamentos").
 
 **Estados e toque**
-17. **Todos os estados existem e são bonitos:** carregando, vazio ("Nenhum pedido hoje"), erro (o que
-    fazer), sucesso, desabilitado (por quê).
+17. **Os 4 estados de toda tela existem e são bonitos** (dica de 04/11/2026): **carregando** (esqueleto cinza no
+    formato do conteúdo, não só um girador), **vazia** (diz o que vai aparecer ali e mostra o primeiro passo:
+    "Nenhum pedido hoje · Ver cardápio"), **erro** (em português, sem código técnico, com "Tentar de novo") e
+    **cheia** (com muito item, nome longo, número grande). Mais sucesso e desabilitado (dizendo por quê).
+    Ações que salvam dados podem ser **otimistas** (a tela já mostra o resultado e desfaz se der erro).
+    **Botão de pagar/enviar/confirmar trava no primeiro toque** (fica "Enviando…" e desabilitado) para não
+    cobrar ou gravar duas vezes.
 18. **Área de toque de pelo menos 44 px** no celular; botões e links não ficam colados.
 19. **Foco visível no teclado** e `aria-label` em botões que só têm ícone.
 20. **Tema escuro**, se a tela tiver: confira as mesmas coisas nele (contraste, ícones, sombras).
+21. **Tempo de espera** (limites clássicos de Jakob Nielsen): até **0,1 s** parece instantâneo (sem aviso); até
+    **1 s** a pessoa não perde o fio (mostre que algo mudou); acima de **1 s** mostre carregando; acima de
+    **10 s** mostre progresso ou deixe a pessoa fazer outra coisa, senão ela desiste.
+
+**Números e controles** (dica de 04/11/2026)
+22. **Números que mudam** (contadores, valores, saldos, relógios) com dígitos de **largura fixa**
+    (`font-variant-numeric: tabular-nums`) para não "tremer"; ao mudar, anime só o dígito que mudou.
+23. **Alvo grande e perto** (lei de Fitts): a ação mais usada é grande e fica onde o dedo já está;
+    seletores de valor (idade, quantidade) encaixam no valor inteiro e têm uma cor só de destaque.
 
 ## 4. Corrigir e mostrar
 
