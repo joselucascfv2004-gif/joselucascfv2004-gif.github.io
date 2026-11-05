@@ -17,3 +17,13 @@ Pedido do dono em 28/10/2026, a partir de um vídeo sobre economizar o limite do
   Regras permanentes continuam indo para este `CLAUDE.md`.
 - O mapa é refeito sozinho no começo de cada sessão (gancho `SessionStart` em `.claude/settings.json`); não edite
   o mapa à mão. A pasta `.cerebro-cache/` é só cache da busca (fica fora do Git).
+
+## Skills
+
+Desde 04/11/2026 (pedido do dono) as skills ficam instaladas na conta do Claude, não no repositório.
+Não crie nem traga pastas `.claude/skills/` para cá.
+
+## Pendências
+
+Ao começar qualquer chat, leia `cerebro/Pendências.md`: lá cada chat anterior deixou o que falta fazer e onde estão
+os arquivos. Ao terminar, atualize esse arquivo (marque o que ficou pronto e acrescente o que ficou faltando).
