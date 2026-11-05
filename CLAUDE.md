@@ -19,3 +19,8 @@ Pedido do dono em 28/10/2026, a partir de um vídeo sobre economizar o limite do
 
 Desde 04/11/2026 (pedido do dono) as skills ficam instaladas na conta do Claude, não no repositório.
 Não crie nem traga pastas `.claude/skills/` para cá.
+
+## Pendências
+
+Ao começar qualquer chat, leia `cerebro/Pendências.md`: lá cada chat anterior deixou o que falta fazer e onde estão
+os arquivos. Ao terminar, atualize esse arquivo (marque o que ficou pronto e acrescente o que ficou faltando).
